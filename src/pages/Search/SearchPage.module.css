@@ -1,0 +1,68 @@
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*padding: var(--spacing-lg);*/
+    min-width: 100%;
+}
+
+.card {
+    width: 100%;
+    max-width: 500px;
+    border-color: var(--color-primary);
+    border-width: 2px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.radioGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.radioLabel {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.radioLabel:hover {
+    border-color: var(--color-primary);
+    background-color: rgba(255, 149, 0, 0.05);
+}
+
+.radioLabel input[type="radio"] {
+    cursor: pointer;
+    width: auto;
+    margin: 0;
+    padding: 0;
+}
+
+.radioLabel span {
+    flex: 1;
+    margin: 0;
+    color: var(--color-text-primary);
+}
+
+.submitBtn {
+    width: 100%;
+    margin-top: var(--spacing-md);
+}
