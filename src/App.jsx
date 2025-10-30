@@ -15,13 +15,18 @@ import RandomCocktailPage from './pages/RandomCocktail/RandomCocktailPage';
 import CategoriesPage from './pages/Categories/CategoriesPage';
 import FavoritesPage from './pages/Favorites/FavoritesPage';
 import ProfilePage from './pages/Profile/ProfilePage';
-import NotFound from "./components/NotFound/NotFound.jsx";
+import NotFound from "./pages/NotFound/NotFound.jsx";
 
 function App() {
     const {user, isLoading} = useContext(UserContext);
 
     // Protected route component
-
+    function ProtectedRoute({element}) {
+        if (isLoading) {
+            return <div>Loading...</div>;
+        }
+        return user ? element : <Navigate to="/unauthorized"/>;
+    }
 
     return (
         <BrowserRouter>
@@ -31,6 +36,20 @@ function App() {
                 <Route path="/register" element={<RegisterPage/>}/>
                 <Route path="/unauthorized" element={<AccessDenied/>}/>
                 <Route path="/not-found" element={<NotFound/>}/>
+
+                {/* PROTECTED ROUTES */}
+                <Route path="/home" element={<ProtectedRoute element={<Layout><HomePage/></Layout>}/>}/>
+                <Route path="/search" element={<ProtectedRoute element={<Layout><SearchPage/></Layout>}/>}/>
+                <Route path="/results" element={<ProtectedRoute element={<Layout><ResultsPage/></Layout>}/>}/>
+                <Route path="/cocktail/:id"
+                       element={<ProtectedRoute element={<Layout><CocktailDetailPage/></Layout>}/>}/>
+                <Route path="/random" element={<ProtectedRoute element={<Layout><RandomCocktailPage/></Layout>}/>}/>
+                <Route path="/categories" element={<ProtectedRoute element={<Layout><CategoriesPage/></Layout>}/>}/>
+                <Route path="/favorites" element={<ProtectedRoute element={<Layout><FavoritesPage/></Layout>}/>}/>
+                <Route path="/profile" element={<ProtectedRoute element={<Layout><ProfilePage/></Layout>}/>}/>
+
+                {/* Catch all */}
+                <Route path="*" element={<Navigate to="/not-found"/>}/>
 
             </Routes>
         </BrowserRouter>
